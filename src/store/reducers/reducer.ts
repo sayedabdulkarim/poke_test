@@ -1,5 +1,5 @@
 // Define the types for state and action
-interface State {
+export interface State {
   pokemonsList: any[];
   allPokemonsList: any[];
   pokemonSelectedId: string | number | null;
