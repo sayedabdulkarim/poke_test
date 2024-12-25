@@ -1,23 +1,11 @@
-import "./App.css";
+import React from "react";
+import { Button } from "rsuite";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => (
+  <div>
+    <h1>Welcome to RSuite</h1>
+    <Button appearance="primary">Click Me</Button>
+  </div>
+);
 
 export default App;

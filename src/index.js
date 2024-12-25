@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
+import "rsuite/styles/index.less";
+import "rsuite/dist/rsuite.min.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
