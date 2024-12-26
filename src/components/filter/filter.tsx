@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Col, Row } from "rsuite";
-import { debounceTime, distinctUntilChanged, map, of } from "rxjs";
+import { debounceTime, distinctUntilChanged, map, Observable, of } from "rxjs";
 import { baseURL, SEARCH_SLICED } from "../../constants/apiUrls";
 import { getCamleCaseString } from "../../constants/pokemon.types";
-import PokemonContext from "../../context/pokemonContext/pokmon.context";
+import PokemonContext, { PokemonContextType } from "../../context/pokemonContext/pokmon.context";
 import {
   getAllParallelCall,
   getPokemonGenders,
@@ -25,13 +25,13 @@ const AppFilter: React.FC<AppFilterProps> = ({ isFilterEnable, ...props }) => {
     dispatch,
     setAppLoading,
     getPokemonDetailsListByUrl,
-  } = useContext(PokemonContext);
+  } = useContext(PokemonContext) as PokemonContextType;
   const { allPokemonsList, pokemonsTypes, pokemonGenderList } = state;
 
   const [isOpenTypeFilter, setIsOpenTypeFilter] = useState(false);
   const [isOpenGendreFilter, setIsOpenGenderFilter] = useState(false);
 
-  let data$ = of([]);
+  let data$: Observable<any[]> = of([] as never[]) as Observable<never[]>;
 
   const onOpenTypeHandler = () => {
     setIsOpenTypeFilter(true);
@@ -223,14 +223,16 @@ const AppFilter: React.FC<AppFilterProps> = ({ isFilterEnable, ...props }) => {
   return (
     <div className="filter-container">
       <div className="filter-wrap">
-        <Row lg={24} xl={24} className="filter-row-wrap show-grid">
+        <Row className="filter-row-wrap show-grid">
           <Col lg={16} xl={16} xs={24} sm={24}>
             <div>
               <SearchFilter
                 placeholder="Name or Number"
                 inputClass="pokemon-search-filter"
                 label="Search By"
-                onChangeHandler={onSearchChangeHandler}
+                onChangeHandler={(value: string, event: React.SyntheticEvent) =>
+                  onSearchChangeHandler(value, event)
+                }
               />
             </div>
           </Col>
@@ -241,7 +243,9 @@ const AppFilter: React.FC<AppFilterProps> = ({ isFilterEnable, ...props }) => {
                 isOpen={isOpenTypeFilter}
                 data={pokemonsTypes}
                 label="Type"
-                onChangeHandler={onTypeChangeHandler}
+                onChangeHandler={(value: any[], event: React.SyntheticEvent) =>
+                  onTypeChangeHandler(value, event)
+                }
                 onOpenHandler={onOpenTypeHandler}
                 onCloseHandler={onCloseTypeHandler}
                 onCleanHandler={onCleanTypeHandler}

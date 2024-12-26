@@ -4,8 +4,9 @@ import { numberFormation } from "../../services/common.service";
 import "./pokemonCard.scss";
 import PropTypes from 'prop-types';
 
+interface Props { data: any, onClick?: () => void, className?: string }
 
-const PokemonCard = ({ data, onClick, className }) => {
+const PokemonCard = ({ data, onClick, className }: Props) => {
     return (
         <>
             <div className={`${className} card`} onClick={onClick} role="presentation" style={{

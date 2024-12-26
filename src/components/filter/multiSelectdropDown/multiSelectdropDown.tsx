@@ -5,10 +5,10 @@ import "./multiSelectdropDown.scss";
 interface AppMultiSelectDropDownProps {
   data: any[]; // Update this with the actual shape of your data if possible
   placeholder?: string;
-  onChangeHandler?: (value: any) => void;
+  onChangeHandler?: (value: any, event: React.SyntheticEvent) => void;
   isOpen?: boolean;
   onCloseHandler?: () => void;
-  onCleanHandler?: () => void;
+  onCleanHandler?: (event: React.SyntheticEvent) => void;
   onOpenHandler?: () => void;
   label?: React.ReactNode;
 }

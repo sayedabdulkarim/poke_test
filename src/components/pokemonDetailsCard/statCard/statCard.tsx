@@ -4,9 +4,9 @@ import { getCamleCaseString } from '../../../constants/pokemon.types';
 import "./statCard.scss";
 import PropTypes from 'prop-types';
 
-const StatCard = ({ stats }) => {
+const StatCard = ({ stats }: { stats: Array<any> }) => {
   // const {data} = data;
-  const getStatHeading = (name) => {
+  const getStatHeading = (name: string) => {
     if (name === "hp") {
       return "HP"
     } else {

@@ -2,10 +2,8 @@ import React from 'react';
 import "./evolutionChainCard.scss"
 import "../../../styles/common.scss";
 import PokemonCard from "../../pokemonCard/pokemonCard";
-import rightArrowIcon from "../../../assets/icons/right-arrow.png"
-import PropTypes from 'prop-types';
 
-const EvolutionChainCard = ({ data }) => {
+const EvolutionChainCard = ({ data }: { data: any }) => {
     const arrayele = [1, 2, 3];
 
     return (
@@ -22,7 +20,7 @@ const EvolutionChainCard = ({ data }) => {
                             {arrayele.length !== index + 1 && (
                                 <div>
                                     <div className="evol-next-arrow">
-                                    <img src={rightArrowIcon} alt="right arrow icon" onKeyDown={() => { }} role="presentation"></img>
+                                    <img src={require("../../../assets/icons/right-arrow.png")} alt="right arrow icon" onKeyDown={() => { }} role="presentation"></img>
                                     </div>
                                 </div>)}
                         </div>))}
@@ -32,8 +30,6 @@ const EvolutionChainCard = ({ data }) => {
     )
 }
 
-EvolutionChainCard.propTypes = {
-    data: PropTypes.object,
-}
+
 
 export default EvolutionChainCard;

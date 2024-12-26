@@ -6,7 +6,7 @@ import SearchIcon from "@rsuite/icons/Search";
 interface SearchFilterProps {
   placeholder?: string;
   inputClass?: string;
-  onChangeHandler?: (value: string) => void;
+  onChangeHandler?: (value: string, event: React.SyntheticEvent) => void;
   label?: React.ReactNode;
   [key: string]: any; // Allow additional props to be passed
 }
@@ -29,7 +29,7 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
             placeholder={placeholder}
             className={inputClass}
             size="lg"
-            onChange={(value: string) => onChangeHandler?.(value)}
+            onChange={(value: string, event: React.SyntheticEvent) => onChangeHandler?.(value, event)}
           />
           <InputGroup.Button>
             <SearchIcon />
