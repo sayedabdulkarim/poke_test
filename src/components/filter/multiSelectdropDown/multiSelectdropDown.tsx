@@ -33,13 +33,14 @@ const AppMultiSelectDropDown: React.FC<AppMultiSelectDropDownProps> = ({
         block
         placeholder={placeholder}
         onChange={onChangeHandler}
+        // onChange={(e) => console.log(e, " eee")}
         size="lg"
-        onOpen={onOpenHandler}
+        // onOpen={onOpenHandler}
         onClose={onCloseHandler}
-        onClean={onCleanHandler}
+        // onClean={onCleanHandler}
         data={data}
-        searchable={false}
-        style={{ width: 224 }}
+        // searchable={false}
+        style={{ width: 224, height: "auto" }} // Fixed dimensions
         {...props}
       />
     </div>
