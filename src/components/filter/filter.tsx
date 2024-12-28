@@ -3,7 +3,9 @@ import { Col, Row } from "rsuite";
 import { debounceTime, distinctUntilChanged, map, Observable, of } from "rxjs";
 import { baseURL, SEARCH_SLICED } from "../../constants/apiUrls";
 import { getCamleCaseString } from "../../constants/pokemon.types";
-import PokemonContext, { PokemonContextType } from "../../context/pokemonContext/pokmon.context";
+import PokemonContext, {
+  PokemonContextType,
+} from "../../context/pokemonContext/pokmon.context";
 import {
   getAllParallelCall,
   getPokemonGenders,
