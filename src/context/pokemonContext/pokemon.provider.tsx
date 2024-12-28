@@ -1,4 +1,10 @@
-import React, { useReducer, useEffect, useRef, ReactNode } from "react";
+import React, {
+  useReducer,
+  useEffect,
+  useRef,
+  ReactNode,
+  useCallback,
+} from "react";
 import { initialState, reducer } from "../../store/reducers/reducer";
 import PokemonContext from "./pokmon.context";
 // import * as ACTIONS from "../../store/actions/pokemonAction";
@@ -28,7 +34,7 @@ export const PokemonProvider: React.FC<PokemonProviderProps> = ({
     });
   };
 
-  const getPokemonData = async (isReset: boolean = false) => {
+  const getPokemonData = useCallback(async (isReset: boolean = false) => {
     if (isReset) {
       batchURL.current = initialURL;
     }
@@ -40,9 +46,10 @@ export const PokemonProvider: React.FC<PokemonProviderProps> = ({
 
     batchURL.current = next;
     const pokemonsList = await getPokemonDetailsListByUrl(results);
+    console.log(pokemonsList, " pokemonsList");
     setPokemonList(pokemonsList);
     setLoadMoreDataInprogress(false);
-  };
+  }, []);
 
   const getPokemonDetailsListByUrl = async (results: any[]) => {
     const pokemonsDetailsList = await Promise.all(
@@ -74,7 +81,7 @@ export const PokemonProvider: React.FC<PokemonProviderProps> = ({
   useEffect(() => {
     getPokemonData().then(() => state.isLoading && setAppLoading(false));
     getAllPokemonDataList();
-  }, []);
+  }, [getPokemonData, state.isLoading]);
 
   return (
     <PokemonContext.Provider
