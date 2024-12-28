@@ -33,7 +33,7 @@ export const reducer = (state: State, action: Action): State => {
     case "ACTIONS.SET_POKEMON_LIST":
       return {
         ...state,
-        pokemonsList: action.payload,
+        pokemonsList: [...state.pokemonsList, ...action.payload],
       };
     case "ACTIONS.SET_ALL_POKEMON_LIST":
       return {
