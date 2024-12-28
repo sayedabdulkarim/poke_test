@@ -4,29 +4,35 @@ import "./home.scss";
 import "../../styles/common.scss";
 import PokemonCard from "../../components/pokemonCard/pokemonCard";
 import Apploader from "../../components/loader/loader";
-import PokemonContext, { PokemonContextType } from "../../context/pokemonContext/pokmon.context";
+import PokemonContext, {
+  PokemonContextType,
+} from "../../context/pokemonContext/pokmon.context";
 import DetailPage from "../details/details.page";
 import { Button, Col, Row } from "rsuite";
 import AppFilter from "../../components/filter/filter";
-
 
 const HomePage = () => {
   const [isCardSelected, setToggleSelect] = useState(false);
   const [pokemonId, setPokemonId] = useState<number>(0);
   const [isFilterEnable, setIsFilterEnable] = useState(false);
 
-
-  const { state, getPokemonData } = useContext(PokemonContext) as PokemonContextType;
+  const { state, getPokemonData } = useContext(
+    PokemonContext
+  ) as PokemonContextType;
   const { pokemonsList, isLoading, isLoadMoreInprogress } = state || {};
 
   const pokemonsListView = useMemo(
     () =>
       pokemonsList?.map((data) => (
         <div key={data.id} className="responsive">
-        <PokemonCard key={data.id} data={data} onClick={() => {
-          setPokemonId(data.id);
-          toggleModal();
-        }} />
+          <PokemonCard
+            key={data.id}
+            data={data}
+            onClick={() => {
+              setPokemonId(data.id);
+              toggleModal();
+            }}
+          />
         </div>
       )),
     [pokemonsList]
@@ -34,15 +40,15 @@ const HomePage = () => {
 
   const handleLoadMoreClick = () => {
     getPokemonData();
-  }
+  };
 
   const toggleModal = () => {
     setToggleSelect((prevState) => !prevState);
-  }
+  };
 
   const isFilterEnableHandler = (isEnable: boolean) => {
     setIsFilterEnable(isEnable);
-  }
+  };
 
   // if (isLoading) return (<Apploader className="app-loader-wrapper" />);
 
@@ -66,38 +72,47 @@ const HomePage = () => {
                 </div>
               </Col>
             </Row>
-
           </Header>
           <div>
-            <AppFilter  isFilterEnable={isFilterEnableHandler} />
+            <AppFilter isFilterEnable={isFilterEnableHandler} />
           </div>
         </div>
-        {pokemonsList.length > 0 && (<div>
-          <div className="card-list">
-            {pokemonsListView}
-          </div>
+        {pokemonsList.length > 0 && (
           <div>
-            {isLoadMoreInprogress && <Apploader className="loadmore-loader" />}
-          </div>
-          {!isFilterEnable && (
-            <div className="load-more-wrap">
-              <Button appearance="link" onClick={handleLoadMoreClick} >Load more </Button>
+            <div className="card-list">{pokemonsListView}</div>
+            <div>
+              {isLoadMoreInprogress && (
+                <Apploader className="loadmore-loader" />
+              )}
             </div>
-          )}
-        </div>)}
-        {(!pokemonsList.length) && (
-          <div className="no-data-found"><span>No data found</span></div>
+            {!isFilterEnable && (
+              <div className="load-more-wrap">
+                <Button appearance="link" onClick={handleLoadMoreClick}>
+                  Load more{" "}
+                </Button>
+              </div>
+            )}
+          </div>
         )}
-        {isLoading && (
-          <Apploader className="app-loader-wrapper" />
+        {!pokemonsList.length && (
+          <div className="no-data-found">
+            <span>No data found</span>
+          </div>
         )}
+        {isLoading && <Apploader className="app-loader-wrapper" />}
         <div>
-          {isCardSelected && (<DetailPage isCardSelected={isCardSelected} toggleModal={toggleModal} pokemonId={pokemonId} offset={pokemonsList.length} />)}
+          {isCardSelected && (
+            <DetailPage
+              isCardSelected={isCardSelected}
+              toggleModal={toggleModal}
+              pokemonId={pokemonId}
+              offset={pokemonsList.length}
+            />
+          )}
         </div>
       </div>
     </>
-  )
-}
-
+  );
+};
 
 export default HomePage;
